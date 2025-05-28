@@ -1,11 +1,39 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Card from './Components/Card'
 
 function App() {
   const [points, setPoints] = useState(0)
+  const [selected, setSelected] = useState([])
   const [highestPoints, setHighestPoints] = useState(0)
+  const [pokemons, setPokemons] = useState([])
 
-  
+   useEffect(() => {
+    const fetchRandomPokemon = async () => {
+      try {
+        // Generate 20 random IDs (Pokémon IDs go up to 1010+)
+        const randomIds = Array.from({ length: 20 }, () => 
+          Math.floor(Math.random() * 1000) + 1
+        );
+
+        // Fetch all Pokémon concurrently
+        const promises = randomIds.map(async (id) => {
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          return response.json();
+        });
+
+        const results = await Promise.all(promises);
+        setPokemons(results);
+      } catch (error) {
+        console.error('Error fetching Pokémon:', error);
+      }
+    };
+
+    fetchRandomPokemon();
+  }, []);
+  pokemons.map((pokemon) => (
+    console.log(pokemon.sprites.other['official-artwork'].front_default)
+  ))
 
   return (
     <>
@@ -16,7 +44,9 @@ function App() {
         <div className='recordPoint'>Highest Points: {highestPoints}</div>
       </div>
       <div className='cardsContainer'>
-
+        {pokemons.map((pokemon) => (
+          <Card img={pokemon.sprites.other['official-artwork'].front_default} name={pokemon.name}/>
+        ))}
       </div>
     </>
   )
