@@ -1,0 +1,16 @@
+* {
+  font-family: "Jolly Lodger", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --step--2: clamp(0.72rem, 0.7931rem + -0.059vw, 0.7813rem);
+  --step--1: clamp(0.9rem, 0.9447rem + -0.0361vw, 0.9375rem);
+  --step-0: clamp(1.125rem, 1.125rem + 0vw, 1.125rem);
+  --step-1: clamp(1.35rem, 1.3392rem + 0.0542vw, 1.4063rem);
+  --step-2: clamp(1.62rem, 1.5934rem + 0.1328vw, 1.7578rem);
+  --step-3: clamp(1.944rem, 1.8952rem + 0.2441vw, 2.1973rem);
+  --step-4: clamp(2.3328rem, 2.253rem + 0.3988vw, 2.7466rem);
+  --step-5: clamp(2.7994rem, 2.6772rem + 0.611vw, 3.4332rem);
+}

@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body{
+  background: linear-gradient(45deg, #f0f8ff, #c2e9fb, #a1c4fd) no-repeat;
+}
+
+.introduction {
+  font-size: var(--step-2);
+}
+
+.pointsContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
