@@ -2,6 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+  padding: 20px 0;
 }
 
 body{
@@ -11,6 +12,50 @@ body{
 
 .introduction {
   font-size: var(--step-2);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.pokeball {
+  margin-top: 50px;
+  width: 50px;
+  height: 50px;
+  animation: rotating 1s ease-in-out infinite;
+}
+
+.shadow {
+  border-radius: 100%;
+  background-color: #444444;
+  animation: shadow 1s ease-in-out infinite;
+}
+
+@keyframes rotating {
+  from {
+    rotate: 0deg;
+    translate: 0 -30px;
+  }
+  to {
+    rotate: 360deg;
+    translate: 0 0;
+  }
+}
+
+@keyframes shadow {
+  from {
+    width: 45px;
+    height: 20px;
+  }
+  to {
+    width: 4px;
+    height: 2px;
+  }
 }
 
 .pointsContainer {
