@@ -12,7 +12,7 @@ function App() {
     const fetchRandomPokemon = async () => {
       try {
         // Generate 20 random IDs (Pokémon IDs go up to 1010+)
-        const randomIds = Array.from({ length: 20 }, () => 
+        const randomIds = Array.from({ length: 24 }, () => 
           Math.floor(Math.random() * 1000) + 1
         );
 
@@ -31,9 +31,6 @@ function App() {
 
     fetchRandomPokemon();
   }, []);
-  pokemons.map((pokemon) => (
-    console.log(pokemon.sprites.other['official-artwork'].front_default)
-  ))
 
   return (
     <>
@@ -45,7 +42,7 @@ function App() {
       </div>
       <div className='cardsContainer'>
         {pokemons.map((pokemon) => (
-          <Card img={pokemon.sprites.other['official-artwork'].front_default} name={pokemon.name}/>
+          <Card key={pokemon.id} img={pokemon.sprites.other['official-artwork'].front_default} name={pokemon.name}/>
         ))}
       </div>
     </>
