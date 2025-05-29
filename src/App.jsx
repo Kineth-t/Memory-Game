@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 import Card from './Components/Card'
+import Start from './Components/Start'
 
 function App() {
   const [loading, setLoading] = useState(true)
+  const [justStarted, setJustStarted] = useState(true)
   const [points, setPoints] = useState(0)
   const [selected, setSelected] = useState([])
   const [highestPoints, setHighestPoints] = useState(0)
@@ -38,6 +40,39 @@ function App() {
     fetchRandomPokemon();
   }, []);
 
+    // Shuffle function using Fisher-Yates algorithm
+  const shuffle = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  const handleSelect = (pokemonId) => {
+    // Use functional updates to avoid stale state
+    setSelected(prevSelected => {
+      const isAlreadySelected = prevSelected.includes(pokemonId);
+      
+      if (isAlreadySelected) {
+        // Game over - update high score and reset
+        setPoints(prevPoints => {
+          setHighestPoints(prevHigh => Math.max(prevHigh, prevPoints));
+          return 0;
+        });
+        return [];
+      } else {
+        // Add to selected and increase points
+        setPoints(prevPoints => prevPoints + 1);
+        return [...prevSelected, pokemonId];
+      }
+    });
+    
+    // Shuffle the cards after click
+    setPokemons(prevPokemons => shuffle(prevPokemons));
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -54,18 +89,22 @@ function App() {
   return (
     <>
       <h1>Pokémon Memory Game</h1>
-      <div className='introduction'>Start the game by selecting a card. To gain a point, select a card you have not selected.</div>
+      {justStarted ? <Start onClick={() => setJustStarted(false)}/> : <>
       <div className='pointsContainer'>
         <div className='currentPoint'>Current Points: {points}</div>
         <div className='recordPoint'>Highest Points: {highestPoints}</div>
       </div>
       <div className='cardsContainer'>
         {pokemons.map((pokemon) => (
-          <Card key={pokemon.id} img={pokemon.sprites.other['official-artwork'].front_default} name={pokemon.name}/>
+          <Card 
+          key={pokemon.id} 
+          img={pokemon.sprites.other['official-artwork'].front_default} 
+          name={pokemon.name}
+          onClick={() => handleSelect(pokemon.id)}/>
         ))}
       </div>
-    </>
-  )
+    </>}
+  </>)
 }
 
 export default App
