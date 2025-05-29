@@ -3,6 +3,8 @@ import './App.css'
 import Card from './Components/Card'
 import Start from './Components/Start'
 
+  let backgroundMusic = null;
+
 function App() {
   const [loading, setLoading] = useState(true)
   const [justStarted, setJustStarted] = useState(true)
@@ -10,6 +12,7 @@ function App() {
   const [selected, setSelected] = useState([])
   const [highestPoints, setHighestPoints] = useState(0)
   const [pokemons, setPokemons] = useState([])
+  const [musicMuted, setMusicMuted] = useState(false);
 
    useEffect(() => {
     const fetchRandomPokemon = async () => {
@@ -73,6 +76,42 @@ function App() {
     setPokemons(prevPokemons => shuffle(prevPokemons));
   };
 
+  const startGame = () => {
+    // Go to the game page
+    setJustStarted(false)
+
+    // Only initialise and play once, loop when finished
+    if (!backgroundMusic) {
+      backgroundMusic = new Audio('src/Assets/pallet-town-theme.mp3')
+      backgroundMusic.loop = true
+      backgroundMusic.volume = 0.5
+    }
+
+    if (!musicMuted) {
+        backgroundMusic.play().catch((err) => {
+          console.error('Failed to play audio:', err);
+        });
+      }
+  }
+
+  const toggleMusic = () => {
+    const newMusicSetting = !musicMuted
+    setMusicMuted(newMusicSetting);
+
+      if (backgroundMusic) {
+        if (newMusicSetting) {
+          backgroundMusic.pause();
+        } else {
+          backgroundMusic.play().catch((err) => {
+            console.error('Failed to play audio:', err);
+          });
+        }
+      }
+
+      return newMuted;
+  };
+
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -89,7 +128,10 @@ function App() {
   return (
     <>
       <h1>Pokémon Memory Game</h1>
-      {justStarted ? <Start onClick={() => setJustStarted(false)}/> : <>
+      {justStarted ? <Start onClick={startGame}/> : <>
+      <button className="muteButton" onClick={toggleMusic}>
+        {musicMuted ? '🔇' : '🔊'}
+      </button>
       <div className='pointsContainer'>
         <div className='currentPoint'>Current Points: {points}</div>
         <div className='recordPoint'>Highest Points: {highestPoints}</div>
