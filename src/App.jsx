@@ -95,11 +95,11 @@ function App() {
   }
 
   const toggleMusic = () => {
-    const newMusicSetting = !musicMuted
-    setMusicMuted(newMusicSetting);
+    const newMutedSetting = !musicMuted
+    setMusicMuted(newMutedSetting);
 
       if (backgroundMusic) {
-        if (newMusicSetting) {
+        if (newMutedSetting) {
           backgroundMusic.pause();
         } else {
           backgroundMusic.play().catch((err) => {
@@ -108,7 +108,7 @@ function App() {
         }
       }
 
-      return newMuted;
+      return newMutedSetting;
   };
 
 

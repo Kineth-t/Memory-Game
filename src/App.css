@@ -10,9 +10,61 @@ body{
   min-height: 100vh
 }
 
-.introduction {
-  font-size: var(--step-2);
+.startScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
 }
+
+.introduction {
+  font-size: var(--step-1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+  justify-content: center;
+}
+
+.startButton {
+  background: linear-gradient(to bottom, red 50%, white 50%);
+  border: 3px solid black;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-weight: bold;
+  color: black;
+  position: relative;
+  cursor: pointer;
+}
+
+.startButton::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 3px solid black;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.startButton:hover {
+  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.7);
+  animation: vibrate 0.2s infinite;
+}
+
+@keyframes vibrate {
+  0% { transform: translate(0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(1px, 1px); }
+}
+
 
 .muteButton {
   position: absolute;
