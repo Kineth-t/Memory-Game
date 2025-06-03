@@ -82,7 +82,7 @@ function App() {
 
     // Only initialise and play once, loop when finished
     if (!backgroundMusic) {
-      backgroundMusic = new Audio('src/Assets/pallet-town-theme.mp3')
+      backgroundMusic = new Audio('/Assets/pallet-town-theme.mp3')
       backgroundMusic.loop = true
       backgroundMusic.volume = 0.5
     }
@@ -118,7 +118,7 @@ function App() {
         <h1>Pokémon Memory Game</h1>
         <div className="loadingText">Catching Pokémons...</div>
         <div className="loading">
-          <img src="src/Images/pokeball.png" alt="Pokeball loading logo" className='pokeball'/>
+          <img src="/Assets/pokeball.png" alt="Pokeball loading logo" className='pokeball'/>
           <div className='shadow'></div>
         </div>
       </div>
