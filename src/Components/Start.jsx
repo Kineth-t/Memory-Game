@@ -10,7 +10,7 @@ function Start({onClick}) {
                         2. To gain a point, select a Pokémon you have not selected previously.
                     </div>
                     <div>
-                        3. If you selected a Pokémon that you've already selected, the points will be reset.
+                        3. If you've selected a Pokémon that you've already selected, the points will be reset.
                     </div>
                     <div>
                         4. When you are ready, click the pokéball. Have fun!!!
